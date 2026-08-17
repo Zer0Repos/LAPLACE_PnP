@@ -1,3 +1,4 @@
-## Zer0's PnP robot
+## <p> align="center" </p> LAPLACE PnP
 
-<p> Pick and place Cartesian robot </p> 
+<p> LAPLACE is a simple P&P Cartesian robot meant for personal use </p>
+
