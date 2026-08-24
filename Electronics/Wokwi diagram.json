@@ -36,12 +36,12 @@
     {
       "type": "wokwi-vcc",
       "id": "vcc1",
-      "top": 248.64,
+      "top": 258.24,
       "left": 192.2,
       "rotate": 180,
       "attrs": {}
     },
-    { "type": "wokwi-gnd", "id": "gnd1", "top": 240, "left": 229.8, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd1", "top": 259.2, "left": 229.8, "attrs": {} },
     {
       "type": "wokwi-stepper-motor",
       "id": "stepper2",
@@ -80,10 +80,10 @@
       "rotate": 90,
       "attrs": { "travelLength": "30" }
     },
-    { "type": "wokwi-vcc", "id": "vcc2", "top": 106.36, "left": 316.8, "attrs": {} },
-    { "type": "wokwi-gnd", "id": "gnd2", "top": 336, "left": 316.2, "attrs": {} },
-    { "type": "wokwi-gnd", "id": "gnd3", "top": -8.2, "left": 95.8, "rotate": 180, "attrs": {} },
-    { "type": "wokwi-vcc", "id": "vcc3", "top": 0.76, "left": 105.6, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc2", "top": 96.76, "left": 316.8, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd2", "top": 345.6, "left": 316.2, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd3", "top": -17.8, "left": 95.8, "rotate": 180, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc3", "top": -8.84, "left": 105.6, "attrs": {} },
     {
       "type": "wokwi-text",
       "id": "text1",
@@ -105,15 +105,32 @@
       "left": 499.2,
       "attrs": { "text": "Y axis motor" }
     },
-    { "type": "wokwi-vcc", "id": "vcc4", "top": 29.56, "left": 230.4, "attrs": {} },
-    { "type": "wokwi-vcc", "id": "vcc5", "top": 29.56, "left": 393.6, "attrs": {} },
-    { "type": "wokwi-vcc", "id": "vcc6", "top": 29.56, "left": 556.8, "attrs": {} },
-    { "type": "wokwi-gnd", "id": "gnd4", "top": 20.6, "left": 239.8, "rotate": 180, "attrs": {} },
-    { "type": "wokwi-gnd", "id": "gnd5", "top": 20.6, "left": 403, "rotate": 180, "attrs": {} },
-    { "type": "wokwi-gnd", "id": "gnd6", "top": 20.6, "left": 566.2, "rotate": 180, "attrs": {} },
-    { "type": "wokwi-vcc", "id": "vcc7", "top": 29.56, "left": 336, "attrs": {} },
-    { "type": "wokwi-vcc", "id": "vcc8", "top": 29.56, "left": 499.2, "attrs": {} },
-    { "type": "wokwi-vcc", "id": "vcc9", "top": 29.56, "left": 172.8, "attrs": {} }
+    { "type": "wokwi-vcc", "id": "vcc4", "top": 19.96, "left": 230.4, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc5", "top": 19.96, "left": 393.6, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc6", "top": 19.96, "left": 556.8, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd4", "top": 11, "left": 239.8, "rotate": 180, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd5", "top": 11, "left": 403, "rotate": 180, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd6", "top": 11, "left": 566.2, "rotate": 180, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc7", "top": 19.96, "left": 336, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc8", "top": 19.96, "left": 499.2, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc9", "top": 19.96, "left": 172.8, "attrs": {} },
+    {
+      "type": "wokwi-servo",
+      "id": "servo1",
+      "top": 123.8,
+      "left": 376.2,
+      "rotate": 270,
+      "attrs": {}
+    },
+    { "type": "wokwi-gnd", "id": "gnd7", "top": 278.4, "left": 441, "attrs": {} },
+    {
+      "type": "wokwi-vcc",
+      "id": "vcc10",
+      "top": 277.44,
+      "left": 451.4,
+      "rotate": 180,
+      "attrs": {}
+    }
   ],
   "connections": [
     [ "esp:TX", "$serialMonitor:RX", "", [] ],
@@ -144,7 +161,25 @@
     [ "esp:22", "oled1:SCL", "blue", [ "v-134.4", "h134.4" ] ],
     [ "esp:25", "drv1:DIR", "gold", [ "v19.05", "h115.2", "v-134.4", "h86.4" ] ],
     [ "esp:26", "drv2:DIR", "gold", [ "v28.65", "h115.2", "v-124.8", "h240" ] ],
-    [ "esp:27", "drv3:DIR", "gold", [ "v38.25", "h508.8" ] ]
+    [ "esp:27", "drv3:DIR", "gold", [ "v38.25", "h508.8" ] ],
+    [ "joystick1:GND", "gnd1:GND", "black", [ "v0" ] ],
+    [ "vcc1:VCC", "joystick1:VCC", "red", [ "v0" ] ],
+    [ "drv1:GND.1", "gnd4:GND", "black", [ "h0" ] ],
+    [ "vcc4:VCC", "drv1:VDD", "red", [ "v0" ] ],
+    [ "vcc9:VCC", "drv1:VMOT", "red", [ "v0" ] ],
+    [ "gnd6:GND", "drv3:GND.1", "black", [ "v0" ] ],
+    [ "vcc6:VCC", "drv3:VDD", "red", [ "v0" ] ],
+    [ "vcc8:VCC", "drv3:VMOT", "red", [ "v0" ] ],
+    [ "gnd5:GND", "drv2:GND.1", "black", [ "v0" ] ],
+    [ "vcc5:VCC", "drv2:VDD", "red", [ "v0" ] ],
+    [ "vcc7:VCC", "drv2:VMOT", "red", [ "v0" ] ],
+    [ "vcc2:VCC", "pot1:VCC", "red", [ "v0" ] ],
+    [ "pot1:GND", "gnd2:GND", "black", [ "v0" ] ],
+    [ "gnd3:GND", "oled1:GND", "black", [ "v0" ] ],
+    [ "vcc3:VCC", "oled1:VCC", "red", [ "v0" ] ],
+    [ "gnd7:GND", "servo1:GND", "black", [ "v0" ] ],
+    [ "vcc10:VCC", "servo1:V+", "red", [ "v0" ] ],
+    [ "esp:14", "servo1:PWM", "gold", [ "v47.85", "h393.6" ] ]
   ],
   "dependencies": {}
 }
