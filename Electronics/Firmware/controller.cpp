@@ -3,9 +3,7 @@
 #include <Adafruit_SSD1306.h>
 #include <ESP32Servo.h>
 
-// =====================================================
-// OLED
-// =====================================================
+//oled pins
 
 constexpr int OLED_WIDTH  = 128;
 constexpr int OLED_HEIGHT = 64;
@@ -21,18 +19,14 @@ Adafruit_SSD1306 display(
   OLED_RESET
 );
 
-// =====================================================
-// INPUTS
-// =====================================================
+//input pin
 
 constexpr int PIN_X   = 34;
 constexpr int PIN_Z   = 35;
 constexpr int PIN_SW  = 32;
 constexpr int PIN_POT = 4;
 
-// =====================================================
-// CLAW SERVO
-// =====================================================
+//claw servo pin
 
 constexpr int SERVO_PIN = 14;
 
@@ -47,23 +41,17 @@ bool clawClosed = false;
 // Used for detecting a button press
 bool lastButtonState = HIGH;
 
-// =====================================================
-// JOYSTICK SETTINGS
-// =====================================================
+//joystick setting
 
 constexpr int JOYSTICK_CENTER   = 2048;
 constexpr int JOYSTICK_DEADZONE = 200;
 
-// =====================================================
-// POTENTIOMETER
-// =====================================================
+//pot
 
 constexpr int POT_LOW  = 100;
 constexpr int POT_HIGH = 3995;
 
-// =====================================================
-// STEPPERS
-// =====================================================
+//stepper pin
 
 struct Stepper {
   int stepPin;
@@ -76,9 +64,7 @@ const Stepper MOTOR_UD = {16, 27};  // Up / Down
 
 constexpr int STEP_DELAY_US = 10;
 
-// =====================================================
-// STEPPER CONTROL
-// =====================================================
+//stepper motor pin
 
 void stepMotor(const Stepper& motor, bool direction)
 {
@@ -91,9 +77,7 @@ void stepMotor(const Stepper& motor, bool direction)
   delayMicroseconds(STEP_DELAY_US);
 }
 
-// =====================================================
-// INITIALIZE STEPPER
-// =====================================================
+//initiate motor
 
 void initializeMotor(const Stepper& motor)
 {
@@ -104,9 +88,7 @@ void initializeMotor(const Stepper& motor)
   digitalWrite(motor.dirPin, LOW);
 }
 
-// =====================================================
-// JOYSTICK MOTOR CONTROL
-// =====================================================
+//joystick motor control
 
 void controlMotor(
   const Stepper& motor,
@@ -123,9 +105,7 @@ void controlMotor(
   }
 }
 
-// =====================================================
-// VERTICAL MOTOR CONTROL
-// =====================================================
+//y axis stepper
 
 void controlVerticalMotor(int potValue)
 {
@@ -137,9 +117,7 @@ void controlVerticalMotor(int potValue)
   }
 }
 
-// =====================================================
-// CLAW CONTROL
-// =====================================================
+//claw control
 
 void toggleClaw()
 {
@@ -155,9 +133,7 @@ void toggleClaw()
   }
 }
 
-// =====================================================
-// BUTTON CONTROL
-// =====================================================
+//button control
 
 void handleButton()
 {
@@ -171,9 +147,7 @@ void handleButton()
   lastButtonState = buttonState;
 }
 
-// =====================================================
-// OLED
-// =====================================================
+//oled
 
 void updateDisplay(
   int valueX,
@@ -209,9 +183,7 @@ void updateDisplay(
   display.display();
 }
 
-// =====================================================
-// SERIAL MONITOR
-// =====================================================
+//serial monitor
 
 void printSerial(
   int valueX,
@@ -236,17 +208,12 @@ void printSerial(
   Serial.println(clawClosed ? "CLOSED" : "OPEN");
 }
 
-// =====================================================
-// SETUP
-// =====================================================
 
 void setup()
 {
   Serial.begin(115200);
 
-  // ---------------------------------------------------
-  // OLED
-  // ---------------------------------------------------
+ //OLED
 
   Wire.begin(OLED_SDA, OLED_SCL);
 
@@ -268,24 +235,17 @@ void setup()
 
   display.display();
 
-  // ---------------------------------------------------
-  // JOYSTICK BUTTON
-  // ---------------------------------------------------
+//joystick button
 
   pinMode(PIN_SW, INPUT_PULLUP);
 
-  // ---------------------------------------------------
-  // STEPPERS
-  // ---------------------------------------------------
+//steppers
 
   initializeMotor(MOTOR_LR);
   initializeMotor(MOTOR_FB);
   initializeMotor(MOTOR_UD);
 
-  // ---------------------------------------------------
-  // CLAW SERVO
-  // ---------------------------------------------------
-
+//claw
   clawServo.setPeriodHertz(50);
   clawServo.attach(SERVO_PIN, 500, 2400);
 
@@ -296,15 +256,10 @@ void setup()
   delay(1000);
 }
 
-// =====================================================
-// LOOP
-// =====================================================
 
 void loop()
 {
-  // ---------------------------------------------------
-  // Read inputs
-  // ---------------------------------------------------
+//read
 
   const int valueX = analogRead(PIN_X);
   const int valueZ = analogRead(PIN_Z);
@@ -312,9 +267,7 @@ void loop()
 
   const bool buttonPressed = digitalRead(PIN_SW) == LOW;
 
-  // ---------------------------------------------------
-  // Control steppers
-  // ---------------------------------------------------
+//control steppers
 
   controlMotor(
     MOTOR_LR,
@@ -332,15 +285,11 @@ void loop()
 
   controlVerticalMotor(potValue);
 
-  // ---------------------------------------------------
-  // Control claw
-  // ---------------------------------------------------
+//claw control
 
   handleButton();
 
-  // ---------------------------------------------------
-  // Output
-  // ---------------------------------------------------
+//output
 
   printSerial(
     valueX,
@@ -355,4 +304,8 @@ void loop()
     potValue,
     buttonPressed
   );
+//cordinate and position system
+
+
+  
 }
