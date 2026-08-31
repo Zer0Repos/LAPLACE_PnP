@@ -30,7 +30,7 @@ constexpr int PIN_POT = 4;
 
 constexpr int SERVO_PIN = 14;
 
-// Adjust claw
+// Adjust these later to fit your claw
 constexpr int CLAW_OPEN_ANGLE   = 30;
 constexpr int CLAW_CLOSED_ANGLE = 100;
 
@@ -38,7 +38,7 @@ Servo clawServo;
 
 bool clawClosed = false;
 
-// button press
+// Used for detecting a button press
 bool lastButtonState = HIGH;
 
 //joystick setting
@@ -138,7 +138,8 @@ void toggleClaw()
 void handleButton()
 {
   bool buttonState = digitalRead(PIN_SW);
-  
+
+  // Detect a new press rather than holding the button
   if (lastButtonState == HIGH && buttonState == LOW) {
     toggleClaw();
   }
@@ -304,6 +305,12 @@ void loop()
     buttonPressed
   );
 //cordinate and position system
+  const int HOME = 18
+  const int RUN = 13
+  const int NEXT = 23
+  const int SAVE = 19
+
+
 
 
   
