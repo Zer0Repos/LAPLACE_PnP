@@ -310,7 +310,8 @@ void loop()
   const int NEXT = 23
   const int SAVE = 19
 
-
+//ache uma forma de armazenar coordenadas 
+//controle os motores utilizando os pushbuttons e coordenadas
 
 
   
